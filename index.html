@@ -31,6 +31,10 @@
       height: 100vh;
       overflow: hidden;
       background: #000;
+      padding-left: max(10px, env(safe-area-inset-left));
+      padding-right: max(10px, env(safe-area-inset-right));
+      padding-top: max(10px, env(safe-area-inset-top));
+      padding-bottom: max(10px, env(safe-area-inset-bottom));
     }
 
     @media (min-width: 768px) {
@@ -140,7 +144,6 @@
       animation: transicionMisteriosa 1.8s ease forwards;
     }
 
-    /* PERGAMINO */
     .cuadro-texto {
       position: absolute;
       top: 10%;
@@ -213,7 +216,6 @@
       animation: parpadear 0.8s infinite;
     }
 
-    /* CHISPAS DEL PERGAMINO */
     .chispa-pergamino {
       position: absolute;
       width: 7px;
@@ -321,6 +323,7 @@
       animation: ondaMagica 0.65s ease-out forwards;
     }
 
+    /* No moví las piedras */
     .p1  { left: 72%; top: 93%; }
     .p2  { left: 5%;  top: 87%; }
     .p3  { left: 54%; top: 75%; }
@@ -360,8 +363,8 @@
 
     .progreso {
       position: absolute;
-      left: 4%;
-      bottom: 2%;
+      left: calc(4% + env(safe-area-inset-left));
+      bottom: calc(2% + env(safe-area-inset-bottom));
       padding: 8px 12px;
       border-radius: 14px;
       background: rgba(255, 248, 235, 0.9);
@@ -374,7 +377,7 @@
 
     .acciones {
       position: absolute;
-      right: 4%;
+      right: calc(6% + env(safe-area-inset-right));
       top: 36%;
       z-index: 29;
     }
@@ -601,6 +604,13 @@
     }
 
     @media (max-width: 480px) {
+      .app {
+        padding-left: max(14px, env(safe-area-inset-left));
+        padding-right: max(14px, env(safe-area-inset-right));
+        padding-top: max(14px, env(safe-area-inset-top));
+        padding-bottom: max(14px, env(safe-area-inset-bottom));
+      }
+
       .boton {
         font-size: 20px;
         padding: 17px 22px;
