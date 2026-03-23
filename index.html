@@ -140,35 +140,70 @@
       animation: transicionMisteriosa 1.8s ease forwards;
     }
 
+    /* PERGAMINO */
     .cuadro-texto {
       position: absolute;
-      top: 7%;
+      top: 10%;
       left: 50%;
       transform: translateX(-50%);
-      width: 88%;
-      background: rgba(255, 243, 230, 0.9);
-      border-radius: 22px;
-      padding: 16px 16px 14px;
-      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
-      border: 2px solid rgba(255,255,255,0.35);
+      width: 72%;
+      max-width: 320px;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 249, 231, 0.96) 0%,
+        rgba(250, 239, 210, 0.95) 100%
+      );
+      border-radius: 18px;
+      padding: 12px 13px 11px;
+      border: 2px solid rgba(212, 163, 115, 0.8);
+      box-shadow:
+        0 10px 22px rgba(0, 0, 0, 0.28),
+        0 0 14px rgba(255, 220, 140, 0.18);
       backdrop-filter: blur(2px);
       z-index: 20;
+      transform-origin: top center;
+      animation:
+        desenrollarPergamino 1s ease,
+        flotarPergamino 4.2s ease-in-out infinite 1s,
+        brilloSuave 3s ease-in-out infinite 1s;
+    }
+
+    .cuadro-texto::before,
+    .cuadro-texto::after {
+      content: "";
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      top: -6px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, #d4a373, #b57d4d);
+      box-shadow: inset 0 0 4px rgba(255,255,255,0.3);
+      opacity: 0.9;
+    }
+
+    .cuadro-texto::before {
+      left: 12px;
+    }
+
+    .cuadro-texto::after {
+      right: 12px;
     }
 
     .cuadro-texto h2 {
-      margin: 0 0 8px 0;
-      font-size: 18px;
+      margin: 0 0 6px 0;
+      font-size: 16px;
       color: #a86318;
       font-weight: normal;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
+      text-align: center;
     }
 
     .cuadro-texto p {
       margin: 0;
-      font-size: 14px;
-      line-height: 1.4;
+      font-size: 12.5px;
+      line-height: 1.32;
       color: #1f1f1f;
-      min-height: 145px;
+      min-height: 112px;
       text-align: justify;
     }
 
@@ -177,6 +212,25 @@
       width: 8px;
       animation: parpadear 0.8s infinite;
     }
+
+    /* CHISPAS DEL PERGAMINO */
+    .chispa-pergamino {
+      position: absolute;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,245,180,1) 0%, rgba(255,210,120,0.9) 55%, rgba(255,210,120,0) 100%);
+      pointer-events: none;
+      z-index: 21;
+      animation: chispaFlota 3.8s ease-in-out infinite;
+      opacity: 0;
+    }
+
+    .cp1 { left: 18%; top: 11%; animation-delay: 0s; }
+    .cp2 { left: 78%; top: 12%; animation-delay: 0.6s; }
+    .cp3 { left: 14%; top: 23%; animation-delay: 1.2s; }
+    .cp4 { left: 82%; top: 24%; animation-delay: 1.8s; }
+    .cp5 { left: 50%; top: 9%;  animation-delay: 2.2s; }
 
     .nota {
       position: absolute;
@@ -325,18 +379,18 @@
       z-index: 29;
     }
 
-.accion-btn {
-  border: none;
-  border-radius: 14px;
-  padding: 7px 10px;
-  background: rgba(255, 248, 235, 0.92);
-  color: #8a4f10;
-  font-size: 11px;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.18);
-  cursor: pointer;
-  min-width: 95px;
-}
+    .accion-btn {
+      border: none;
+      border-radius: 14px;
+      padding: 7px 10px;
+      background: rgba(255, 248, 235, 0.92);
+      color: #8a4f10;
+      font-size: 11px;
+      font-weight: bold;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.18);
+      cursor: pointer;
+      min-width: 95px;
+    }
 
     .final {
       position: absolute;
@@ -489,6 +543,63 @@
       }
     }
 
+    @keyframes desenrollarPergamino {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) scaleY(0.08) scaleX(0.92);
+        filter: blur(2px);
+      }
+      55% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1.06) scaleX(1.01);
+        filter: blur(0);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) scaleY(1) scaleX(1);
+        filter: blur(0);
+      }
+    }
+
+    @keyframes flotarPergamino {
+      0%, 100% {
+        transform: translateX(-50%) translateY(0);
+      }
+      50% {
+        transform: translateX(-50%) translateY(6px);
+      }
+    }
+
+    @keyframes brilloSuave {
+      0%, 100% {
+        box-shadow:
+          0 10px 22px rgba(0, 0, 0, 0.28),
+          0 0 10px rgba(255, 220, 140, 0.12);
+      }
+      50% {
+        box-shadow:
+          0 10px 22px rgba(0, 0, 0, 0.28),
+          0 0 22px rgba(255, 220, 140, 0.30);
+      }
+    }
+
+    @keyframes chispaFlota {
+      0% {
+        opacity: 0;
+        transform: translateY(8px) scale(0.5);
+      }
+      20% {
+        opacity: 1;
+      }
+      70% {
+        opacity: 0.9;
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(-18px) scale(1.2);
+      }
+    }
+
     @media (max-width: 480px) {
       .boton {
         font-size: 20px;
@@ -501,18 +612,19 @@
       }
 
       .cuadro-texto {
-        top: 6%;
-        width: 90%;
-        padding: 15px 15px 13px;
+        top: 8.5%;
+        width: 74%;
+        max-width: 300px;
+        padding: 11px 12px 10px;
       }
 
       .cuadro-texto h2 {
-        font-size: 17px;
+        font-size: 15px;
       }
 
       .cuadro-texto p {
-        font-size: 13px;
-        min-height: 150px;
+        font-size: 12px;
+        min-height: 108px;
       }
 
       .nota {
@@ -533,9 +645,9 @@
       }
 
       .accion-btn {
-        min-width: 116px;
-        font-size: 11px;
-        padding: 9px 10px;
+        min-width: 90px;
+        font-size: 10px;
+        padding: 6px 8px;
       }
     }
   </style>
@@ -562,6 +674,12 @@
         <h2>AVENTURA SONORA</h2>
         <p id="texto-escribiendo"><span class="cursor">|</span></p>
       </div>
+
+      <div class="chispa-pergamino cp1"></div>
+      <div class="chispa-pergamino cp2"></div>
+      <div class="chispa-pergamino cp3"></div>
+      <div class="chispa-pergamino cp4"></div>
+      <div class="chispa-pergamino cp5"></div>
 
       <div class="acciones">
         <button class="accion-btn" onclick="reiniciarAventura()">⭐ Reiniciar</button>
@@ -608,7 +726,6 @@
   <script>
     let audioContext;
     let musicaIniciada = false;
-    let textoYaEscrito = false;
     let audioActual = null;
     const piedrasTocadas = new Set();
 
@@ -782,7 +899,6 @@
     function escribirTextoAnimado() {
       const elemento = document.getElementById("texto-escribiendo");
       elemento.innerHTML = '<span class="cursor">|</span>';
-      textoYaEscrito = false;
 
       let i = 0;
 
@@ -794,7 +910,6 @@
           setTimeout(escribir, 22);
         } else {
           elemento.innerHTML = textoAventura;
-          textoYaEscrito = true;
         }
       }
 
@@ -912,5 +1027,6 @@
     crearLuces();
     actualizarProgreso();
   </script>
+
 </body>
 </html>
